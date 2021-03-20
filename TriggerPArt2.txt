@@ -1,0 +1,67 @@
+In reference to oracle
+
+old & new pseudorecords
+
+they are referenced as
+
+:old.columnname
+:new.columnname
+---------------------
+conditional predicates
+ -----inserting,updating,deleting
+ 
+-------------------------------------------------
+			I			U          D
+Before      ----       old        old
+After       new        old		 old
+					   new
+
+For			1value		2 value	 1vlaue
+
+
+--------------------------------------------------
+----Instead of Triggers
+-----------------------
+--If there are multiple triggers along with instead of trigger 
+---on the table, the instead of trigger is fired first in the order.
+--INSTEAD of triggers can be created on views.
+--we can define only one instead of trigger per INSERT, UPDATE, 
+---or DELETE statement on a table or view
+
+create trigger trig_d1
+on dept instead of delete
+as 
+begin
+declare
+@dno int
+select @dno=deptno from inserted
+insert into deptAudit values  (@dno,getdate(),user_id())
+select * from students;
+print 'this table has references of the dept table... pls donot delete'
+end;
+
+create trigger deptDelete
+on dept
+after delete 
+as 
+begin
+declare 
+@dno int
+select @dno=deptno from inserted
+delete from dept
+where deptno=@dno
+print 'deleted'
+end;
+
+select USER_NAME()
+select user_id()
+
+
+
+select * from dept
+select * from Students
+
+delete from dept
+where deptno=40
+
+Disable trigger trig_d1

@@ -1,0 +1,57 @@
+----Triggers
+---special procedures that are called automatically.
+--- ie the neednot be called like function or procedures
+-----procedure----- execute procedurename
+-----function---- select functionname(parameters)
+
+---types of triggers
+--- dml--- i/u/d--- instead of triggers
+--ddl---create/alter/drop any object on whcih trigger is created (table) 
+---- ddl tigger
+---logon ----when user login,logsout----
+
+
+create trigger trig_Dept
+ on dept after update 
+ as
+ begin
+ print 'dept updated'
+ end;
+
+
+
+ alter trigger trig_deptforUpdate
+ on dept for update 
+ as
+ begin
+ print 'dept updated with for update'
+ end;
+
+
+ create table deptHist
+ (deptno int,
+ changedDate date)
+
+
+
+ select * from dept
+ go
+ select * from depthist
+ go
+
+ update dept 
+ set dname='Computers'
+ where dname like 'chemistry'
+
+
+ drop trigger trig_Dept
+
+ 
+
+
+ 
+
+
+ 
+
+

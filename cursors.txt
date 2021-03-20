@@ -1,0 +1,32 @@
+declare 
+@empid int,
+@ename varchar(10),
+@sal numeric(7,2)
+
+declare emp_cur  cursor dynamic for
+select empno,ename,sal from emp
+for update of ename,sal;
+ 
+ open emp_cur
+ fetch next from emp_cur  into @empid,@ename,@sal
+  --print 'EmployeeID' + '    ' + 'EmployeeName'
+   while @@fetch_status=0
+ begin
+		if @ename='SMITH'
+	begin
+	update emp
+	set sal=3000
+	where current of emp_cur
+
+	--delete from emp
+	--where current of emp_cur
+	end
+		fetch next from emp_cur into @empid,@ename,@sal
+end
+	--begin
+	
+	--	print  cast(@empid as varchar(10))  + ' ' + '  ' + cast(@ename as varchar(10))
+	--	fetch next from emp_cur into @empid,@ename
+	--end
+close emp_cur
+deallocate emp_cur

@@ -1,0 +1,70 @@
+--DECLARE
+--//declarations
+--begin
+--//code
+--end;
+
+---oracle-- dbms_output.put_line('hello');
+------dbms_output.put_line(i);
+--------------------------------------------
+---sqlserver--- print('hello')
+
+
+
+begin
+declare
+@i int,
+@j int,
+@k int
+
+set @i=10
+set @j=3
+set @k=@i%@j
+print('hello')
+print @k
+end
+
+---------------------------
+select * from emp
+
+declare
+@fname varchar(10),
+@empid numeric(4,0)
+begin
+set @empid=7369
+
+select @fname=ename from emp
+where empno=@empid
+print @fname
+end
+------------------------------
+
+begin
+declare
+@no int
+set @no=100
+
+if @no=10
+begin
+print 'Value of no=10'
+end
+else
+begin
+print 'Value of no!=10'
+end
+end;
+------------------------------
+begin
+declare
+@m1 varchar(20),
+@m2 varchar(20),
+@uname varchar(40),
+@dbname varchar(60)
+set @m1='hello'
+set @m2='world'
+print @m1 + '  ' + @m2
+set @uname=USER_NAME() 
+print @uname
+set @dbname=DB_NAME()
+print @dbname
+end
